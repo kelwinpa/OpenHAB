@@ -1,0 +1,269 @@
+import java.util.Date
+import java.nio.charset.Charset
+import java.nio.file.Paths
+import java.net.URI
+import java.nio.file.Files
+import java.util.List
+
+var Number lights_on_counter_LR = 0
+var Number lights_on_counter_K = 0
+var Number lights_on_counter_SR = 0
+var Number lights_on_counter_BR = 0
+var Number lights_number = 8
+var Number lights_on_counter = 0
+var Number lights_livingroom_on_counter = 0
+var Number lights_kitchen_on_counter = 0
+var Number lights_bathroom_on_counter = 0
+var Number lights_sleepingroom_on_counter = 0
+
+var Number windows_open_counter_LR = 0
+var Number windows_open_counter_K = 0
+var Number windows_open_counter_SR = 0
+var Number windows_open_counter_BR = 0
+var Number windows_number = 6
+var Number windows_open_counter = 0
+var Number windows_livingroom_open_counter = 0
+var Number windows_kitchen_open_counter = 0
+var Number windows_bathroom_open_counter = 0
+var Number windows_sleepingroom_open_counter = 0
+
+
+//High-level goals variables
+var String goal_name
+var Number threashold //if goal is of temperature
+var Date date_beg
+var Date date_end
+var String url = "C:\\Users\\agost\\Documents\\Ruscio\\OpenHAB\\configurations\\high_level_goals.conf"
+
+
+rule Startup
+when
+	System started
+then
+	var List<String> lines = Files.readAllLines(Paths.get(new URI(url)), Charset.defaultCharset());
+	goal_name = lines.get(0);
+	
+end
+
+
+
+/*//Living room
+rule "Increase open windows counter LivingRoom"
+when
+	Item LivingRoom_Windows_l1 		changed from OFF to ON or
+	Item LivingRoom_Windows_l2 		changed from OFF to ON
+then
+	logDebug("demo","value of windows_open_counter_LR " + windows_open_counter_LR)
+	windows_open_counter_LR = windows_open_counter_LR + 1;
+	if(windows_open_counter_LR > 2) windows_open_counter_LR = 2;
+	postUpdate(Windows_LivingRoom, windows_open_counter_LR)
+	
+	windows_open_counter = windows_open_counter + 1;
+	if(windows_open_counter > 6) windows_open_counter = 6;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Decrease open windows counter LivingRoom"
+when
+	Item LivingRoom_Windows_l1 		changed from ON to OFF or
+	Item LivingRoom_Windows_l2 		changed from ON to OFF
+then
+	windows_open_counter_LR = windows_open_counter_LR - 1;
+	if(windows_open_counter_LR < 0) windows_open_counter_LR = 0;
+	postUpdate(Windows_LivingRoom, windows_open_counter_LR)
+	
+	windows_open_counter = windows_open_counter - 1;
+	if(windows_open_counter < 0) windows_open_counter = 0;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Increase lights on counter LivingRoom"
+when
+	Item LivingRoom_Lights_l1 		changed from OFF to ON or
+	Item LivingRoom_Lights_l2 		changed from OFF to ON or
+	Item LivingRoom_Lights_l3 		changed from OFF to ON
+then
+	lights_on_counter_LR = lights_on_counter_LR + 1;
+	if(lights_on_counter_LR > 3) lights_on_counter_LR = 3;
+	postUpdate(Lights_LivingRoom, lights_on_counter_LR)
+	
+	windows_open_counter = windows_open_counter + 1;
+	if(windows_open_counter > 6) windows_open_counter = 6;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Decrease open lights on LivingRoom"
+when
+	Item LivingRoom_Lights_l1 		changed from ON to OFF or
+	Item LivingRoom_Lights_l2 		changed from ON to OFF or
+	Item LivingRoom_Lights_l3 		changed from ON to OFF
+then
+	lights_on_counter_LR = lights_on_counter_LR - 1;
+	if(lights_on_counter_LR < 0) lights_on_counter_LR = 0;
+	postUpdate(Lights_LivingRoom, lights_on_counter_LR)
+	
+	windows_open_counter = windows_open_counter - 1;
+	if(windows_open_counter < 0) windows_open_counter = 0;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+//Kitchen
+rule "Increase open windows counter Kitchen"
+when
+	Item Kitchen_Windows_l1 		changed from OFF to ON or
+	Item Kitchen_Windows_l2 		changed from OFF to ON
+then
+	windows_open_counter_K = windows_open_counter_K + 1;
+	if(windows_open_counter_K > 2) windows_open_counter_K = 2;
+	postUpdate(Windows_Kitchen, windows_open_counter_K)
+	
+	windows_open_counter = windows_open_counter + 1;
+	if(windows_open_counter > 6) windows_open_counter = 6;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Decrease open windows counter Kitchen"
+when
+	Item Kitchen_Windows_l1 		changed from ON to OFF or
+	Item Kitchen_Windows_l2 		changed from ON to OFF
+then
+	windows_open_counter_K = windows_open_counter_K - 1;
+	if(windows_open_counter_K < 0) windows_open_counter_K = 0;
+	postUpdate(Windows_Kitchen, windows_open_counter_K)
+	
+	windows_open_counter = windows_open_counter - 1;
+	if(windows_open_counter < 0) windows_open_counter = 0;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Increase lights on counter Kitchen"
+when
+	Item Kitchen_Lights_l1 		changed from OFF to ON or
+	Item Kitchen_Lights_l2 		changed from OFF to ON
+then
+	lights_on_counter_K = lights_on_counter_K + 1;
+	if(lights_on_counter_K > 2) lights_on_counter_K = 2;
+	postUpdate(Lights_Kitchen, lights_on_counter_K)
+	
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > 8) lights_on_counter = 8;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Decrease open lights on Kitchen"
+when
+	Item Kitchen_Lights_l1 		changed from ON to OFF or
+	Item Kitchen_Lights_l2 		changed from ON to OFF
+then
+	lights_on_counter_K = lights_on_counter_K - 1;
+	if(lights_on_counter_K < 0) lights_on_counter_K = 0;
+	postUpdate(Lights_Kitchen, lights_on_counter_K)
+end
+
+//Sleeping room
+rule "Increase open windows counter Sleeping room"
+when
+	Item SleepingRoom_Windows_l1 		changed from OFF to ON
+then
+	windows_open_counter_SR = windows_open_counter_SR + 1;
+	if(windows_open_counter_SR > 2) windows_open_counter_SR = 2;
+	postUpdate(Windows_SleepingRoom, windows_open_counter_SR)
+	
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > 8) lights_on_counter = 8;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Decrease open windows counter Sleeping room"
+when
+	Item SleepingRoom_Windows_l1 		changed from ON to OFF
+then
+	windows_open_counter_SR = windows_open_counter_SR - 1;
+	if(windows_open_counter_SR < 0) windows_open_counter_SR = 0;
+	postUpdate(Windows_SleepingRoom, windows_open_counter_SR)
+	
+	lights_on_counter = lights_on_counter - 1;
+	if(lights_on_counter < 0) lights_on_counter = 0;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Increase lights on counter Sleeping room"
+when
+	Item SleepingRoom_Lights_l1 		changed from OFF to ON or
+	Item SleepingRoom_Lights_l2 		changed from OFF to ON
+then
+	lights_on_counter_SR = lights_on_counter_SR + 1;
+	if(lights_on_counter_SR > 2) lights_on_counter_SR = 2;
+	postUpdate(Lights_SleepingRoom, lights_on_counter_SR)
+	
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > 8) lights_on_counter = 8;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Decrease open lights on Sleeping room"
+when
+	Item SleepingRoom_Lights_l1 		changed from ON to OFF or
+	Item SleepingRoom_Lights_l2 		changed from ON to OFF
+then
+	lights_on_counter_SR = lights_on_counter_SR - 1;
+	if(lights_on_counter_SR < 0) lights_on_counter_SR = 0;
+	postUpdate(Lights_SleepingRoom, lights_on_counter_SR)
+	
+	lights_on_counter = lights_on_counter - 1;
+	if(lights_on_counter < 0) lights_on_counter = 0;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+//Bathroom
+rule "Increase open windows counter Bathroom"
+when
+	Item Bathroom_Windows_l1 		changed from OFF to ON
+then
+	windows_open_counter_BR = windows_open_counter_BR + 1;
+	if(windows_open_counter_BR > 1) windows_open_counter_BR = 1;
+	postUpdate(Windows_Bathroom, windows_open_counter_BR)
+	
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > 8) lights_on_counter = 8;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Decrease open windows counter Bathroom"
+when
+	Item Bathroom_Windows_l1 		changed from ON to OFF
+then
+	windows_open_counter_BR = windows_open_counter_BR - 1;
+	if(windows_open_counter_BR < 0) windows_open_counter_BR = 0;
+	postUpdate(Windows_Bathroom, windows_open_counter_BR)
+	
+	lights_on_counter = lights_on_counter - 1;
+	if(lights_on_counter < 0) lights_on_counter = 0;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Increase lights on counter Bathroom"
+when
+	Item Bathroom_Lights_l1 		changed from OFF to ON
+then
+	lights_on_counter_BR = lights_on_counter_BR + 1;
+	if(lights_on_counter_BR > 1) lights_on_counter_BR = 1;
+	postUpdate(Lights_Bathroom, lights_on_counter_BR)
+	
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > 8) lights_on_counter = 8;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Decrease open lights on Bathroom"
+when
+	Item Bathroom_Lights_l1 		changed from ON to OFF
+then
+	lights_on_counter_BR = lights_on_counter_BR - 1;
+	if(lights_on_counter_BR < 0) lights_on_counter_BR = 0;
+	postUpdate(Lights_Bathroom, lights_on_counter_BR)
+	
+	lights_on_counter = lights_on_counter - 1;
+	if(lights_on_counter < 0) lights_on_counter = 0;
+	postUpdate(LightsOn, lights_on_counter)
+end*/

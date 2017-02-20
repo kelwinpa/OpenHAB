@@ -1,0 +1,26 @@
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+EclipseSmartHome      # ignore everything in the directory
+
+Execution/*
+!Execution/src   # except src
+
+High-level Goals GUI/*
+!High-level Goals GUI/src
+
+Monitoring/*
+!Monitoring/src
+
+OpenHAB/*
+!OpenHAB/configurations

@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: genie.smarthome
+Build-Jdk: 1.7.0_80
+Created-By: Apache Maven 3.3.9
+
+Name: notice.html
+SHA-256-Digest: rB3XpDlGcSfkhCKIejGIXZkFhA5wV6CSZOapZdMh5n8=
+
+Name: feature.xml
+SHA-256-Digest: bq4h1riAgJLW+LTnfyzU2RgtD+PHPsRnr13QsJKaSX4=
+
+Name: feature.properties
+SHA-256-Digest: E5dohYyOXHIqJGUjpibjnmlN4md567u3NTXohilvW3U=
+
+Name: license.html
+SHA-256-Digest: ZPcWT+RA2U0NZV/Hr4/R34K2EI57/1SEd6GAKmcYeg0=
+

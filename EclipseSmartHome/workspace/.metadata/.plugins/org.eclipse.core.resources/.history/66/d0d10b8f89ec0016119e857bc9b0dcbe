@@ -1,0 +1,29 @@
+Number Electricity_Consumption {mqtt="<[mybroker:home/general/electricity:state:default],>[mybroker:home/general/electricity:state:default]"}
+
+Number LightsOn
+Number Lights_LivingRoom 
+Number Lights_Kitchen 
+Number Lights_SleepingRoom 
+Number Lights_Bathroom 
+Switch LivingRoom_Lights_l1
+Switch LivingRoom_Lights_l2
+Switch LivingRoom_Lights_l3
+Switch Kitchen_Lights_l1
+Switch Kitchen_Lights_l2
+Switch SleepingRoom_Lights_l1
+Switch SleepingRoom_Lights_l2
+Switch Bathroom_Lights_l1
+
+Number Windows_Number 
+Number Windows_LivingRoom
+Number Windows_Kitchen 
+Number Windows_SleepingRoom 
+Number Windows_Bathroom 
+Switch LivingRoom_Windows_l1
+Switch LivingRoom_Windows_l2
+Switch Kitchen_Windows_l1
+Switch Kitchen_Windows_l2
+Switch SleepingRoom_Windows_l1
+Switch Bathroom_Windows_l1
+
+Number Temperature

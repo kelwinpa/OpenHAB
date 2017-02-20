@@ -1,0 +1,193 @@
+import java.util.Date
+import java.util.List
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.net.URI
+import java.nio.charset.Charset
+import java.text.SimpleDateFormat
+import java.io.FileReader
+
+//High-level goals variables
+var String url = "C:\\Users\\agost\\Documents\\Ruscio\\OpenHAB\\configurations\\high_level_goals.conf"
+var String electricity_goal = null
+var Number threshold //if goal is of temperature
+var Date date_beg = null
+var Date date_end = null
+
+var Timer windowsAlarm = null
+
+rule Startup
+when
+	System started
+then
+	var lastGoal = null
+	logDebug( "mylogs", "Starting decision.rules...." )
+	var List<String> lines = Files.readAllLines(Paths.get(url), Charset.forName("UTF-8"))
+	lines?.members.forEach[s|
+		logDebug( "mylogs", s)
+		if(s.equals("WINDOW") || s.contains("KEEP") || s.contains("ELEC")) {
+			lastGoal = s
+		}
+		else {
+			if(lastGoal.equals("WINDOW")) {
+				if(date_beg == null) {
+					date_beg = new SimpleDateFormat("HH:mm").parse(s)
+				} else {
+					date_end = new SimpleDateFormat("HH:mm").parse(s)
+				}
+			}
+			else if(lastGoal.contains("KEEP")) {
+				threshold = Float.parseFloat(s)
+			}
+		]
+	}
+end
+
+rule "Increase temperature - threashold reached"
+when
+	Item Temperature received update
+then
+logDebug( "mylogs", "Increase temperature. threshold = "+threshold );
+	// Plan: if temperature < threshold => increase it
+	if(Temperature.state instanceof DecimalType) {
+		var Number temp = Temperature.state as DecimalType
+		if(temp < threshold) {
+			//say execute to increase temperature and close windows
+			logDebug( "mylogs", "Asking to Execution.jar" );
+			Runtime.getRuntime().exec("java -jar Execution.jar \"increase temperature\" \"" + threshold + "\"");
+			logDebug( "mylogs", "Done" );
+		}
+	}
+end
+
+rule "Open windows and balconies"
+when
+	 Time cron "0 * * * * ?"  //every minute
+then
+	if(date_beg != null && date_beg != null) {
+		
+		var Date date = new Date();
+		if(date_beg.toString().equals(new SimpleDateFormat("HH:mm").format(date)) ) {
+			//open all windows
+			postUpdate(Windows_Number, 6);
+			postUpdate(Windows_LivingRoom, 2);
+			postUpdate(Windows_Kitchen, 2);
+			postUpdate(Windows_SleepingRoom, 1);
+			postUpdate(Windows_Bathroom, 1);
+			postUpdate(LivingRoom_Windows_l1, ON);
+			postUpdate(LivingRoom_Windows_l2, ON);
+			postUpdate(Kitchen_Windows_l1, ON);
+			postUpdate(Kitchen_Windows_l2, ON);
+			postUpdate(SleepingRoom_Windows_l1, ON);
+			postUpdate(Bathroom_Windows_l1, ON);
+	
+			//notify this to execution
+			//execution should make temperature decrease
+			
+			
+		}
+		
+		if(date_end.toString().equals(new SimpleDateFormat("HH:mm").format(date)) ) {
+			//close all windows
+			postUpdate(Windows_Number, 0);
+			postUpdate(Windows_LivingRoom, 0);
+			postUpdate(Windows_Kitchen, 0);
+			postUpdate(Windows_SleepingRoom, 0);
+			postUpdate(Windows_Bathroom, 0);
+			postUpdate(LivingRoom_Windows_l1, OFF);
+			postUpdate(LivingRoom_Windows_l2, OFF);
+			postUpdate(Kitchen_Windows_l1, OFF);
+			postUpdate(Kitchen_Windows_l2, OFF);
+			postUpdate(SleepingRoom_Windows_l1, OFF);
+			postUpdate(Bathroom_Windows_l1, OFF);
+	
+			//notify this to execution
+			//execution should make temperature increase
+			
+		}
+	}
+end
+
+
+/*
+//Keep house warm/fresh
+rule "Keep house fresh (start daytime)"
+when
+	
+then
+	
+end
+
+rule "Keep house fresh (end daytime)"
+when
+	
+then
+	//say execution not
+end */
+
+//Electricity
+rule "Minimize electricity consumption living room"
+when
+	Item People_LivingRoom 		received update
+then
+	try {
+		Thread::sleep(1000)
+		//say execution to close light within this area
+		if(electricity_goal.equals("ELEC_MIN")) {
+			
+		}
+	}
+	catch(InterruptedException e) {
+		
+    }
+end
+
+rule "Minimize electricity consumption kitchen"
+when
+	Item People_Kitchen 		received update
+then
+	try {
+		Thread::sleep(1000)
+		//say execution to close light within this area
+		if(electricity_goal.equals("ELEC_MIN")) {
+			
+		}
+	}
+	catch(InterruptedException e) {
+		
+    }
+end
+
+rule "Minimize electricity consumption sleeping room"
+when
+	Item People_SleepingRoom 	received update
+then
+	try {
+		Thread::sleep(1000)
+		//say execution to close light within this area
+		if(electricity_goal.equals("ELEC_MIN")) {
+			
+		}
+	}
+	catch(InterruptedException e) {
+		
+    }
+end
+
+rule "Minimize electricity consumption bathroom"
+when
+	Item People_Bathroom 		received update
+then
+	try {
+		Thread::sleep(1000)
+		//say execution to close light within this area
+		if(electricity_goal.equals("ELEC_MIN")) {
+			
+		}
+	}
+	catch(InterruptedException e) {
+		
+    }
+end
+
+//change to do: aggiungere variabile per dire se c'è optimize energy consumption o minimize. necessario per check nelle ultime rules

@@ -1,0 +1,4 @@
+#encoding=UTF-8
+#version=1
+org.eclipse.emf.mwe2.lib.source,2.8.3.v201512160556,plugins/org.eclipse.emf.mwe2.lib.source_2.8.3.v201512160556.jar,-1,false
+org.eclipse.emf.mwe2.runtime.source,2.8.3.v201512160556,plugins/org.eclipse.emf.mwe2.runtime.source_2.8.3.v201512160556.jar,-1,false

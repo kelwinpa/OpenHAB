@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2014-2015 openHAB UG (haftungsbeschraenkt) and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+-->
+<feature
+      id="org.eclipse.smarthome.feature.dependencies.designer"
+      label="Eclipse SmartHome Designer Dependencies"
+      version="0.8.0"
+      provider-name="Eclipse.org">
+
+   <description>
+      This feature defines all bundles that form the Eclipse SmartHome designer dependencies.
+   </description>
+
+   <copyright>
+      Copyright (C) 2016 by the respective copyright owners
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <includes
+         id="org.eclipse.xtext.ui"
+         version="2.9.2.v201603040440"/>
+
+   <includes
+         id="org.eclipse.platform"
+         version="4.4.0.v20140606-1558"/>
+
+   <includes
+         id="org.eclipse.jdt"
+         version="3.10.0.v20140606-1536"/>
+
+   <includes
+         id="org.eclipse.emf.codegen"
+         version="2.11.0.v20150601-0402"/>
+
+   <includes
+         id="org.eclipse.emf.mwe2.runtime.sdk"
+         version="2.8.3.v201512160556"/>
+
+   <includes
+         id="org.eclipse.emf.ecore.edit"
+         version="2.9.0.v20150601-0402"/>
+
+   <includes
+         id="org.eclipse.emf.edit"
+         version="2.11.0.v20150601-0402"/>
+
+   <includes
+         id="org.eclipse.emf.ecore"
+         version="2.11.0.v20150512-0501"/>
+
+   <includes
+         id="org.eclipse.emf.edit.ui"
+         version="2.11.0.v20150601-0402"/>
+
+   <includes
+         id="org.eclipse.emf.common.ui"
+         version="2.10.0.v20150601-0402"/>
+
+   <includes
+         id="org.eclipse.emf.common"
+         version="2.11.0.v20150512-0501"/>
+
+   <requires>
+      <import plugin="com.google.gson" version="2.2.4.v201311231704" match="perfect"/>
+      <import plugin="org.apache.commons.lang"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="org.slf4j.api"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.apache.commons.io"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.antlr.runtime"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.ui.shared"/>
+      <import plugin="org.eclipse.xtext.builder"/>
+      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.collections"/>
+      <import plugin="org.slf4j.jul"/>
+      <import plugin="org.slf4j.log4j"/>
+      <import plugin="javax.mail.glassfish"/>
+      <import plugin="org.apache.commons.httpclient"/>
+      <import plugin="org.eclipse.xtext.common.types.ui"/>
+      <import plugin="org.eclipse.compare"/>
+      <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
+      <import plugin="org.eclipse.xtext.xbase.ui"/>
+      <import plugin="org.slf4j.jcl"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.eclipse.smarthome.core.transform"/>
+      <import plugin="org.eclipse.xtext.common.types"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
+      <import plugin="org.eclipse.pde.build"/>
+      <import plugin="org.eclipse.pde.core"/>
+   </requires>
+
+   <plugin
+         id="ch.qos.logback.classic"
+         download-size="255"
+         install-size="518"
+         version="1.0.7.v20121108-1250"
+         unpack="false"/>
+
+   <plugin
+         id="ch.qos.logback.slf4j"
+         download-size="10"
+         install-size="16"
+         version="1.0.7.v20121108-1250"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.api"
+         download-size="34"
+         install-size="61"
+         version="1.7.2.v20121108-1250"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.log4j"
+         download-size="29"
+         install-size="47"
+         version="1.7.2.v20130115-1340"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.collections"
+         download-size="598"
+         install-size="1211"
+         version="3.2.0.v2013030210310"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.io"
+         download-size="190"
+         install-size="391"
+         version="2.2.0.v201405211200"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.lang"
+         download-size="292"
+         install-size="619"
+         version="2.6.0.v201404270220"
+         unpack="false"/>
+
+   <plugin
+         id="ch.qos.logback.core"
+         download-size="380"
+         install-size="722"
+         version="1.0.7.v20121108-1250"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.cm"
+         download-size="71"
+         install-size="146"
+         version="1.1.0.v20131021-1936"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.event"
+         download-size="31"
+         install-size="57"
+         version="1.3.100.v20140115-1647"
+         unpack="false"/>
+
+   <plugin
+         id="javax.activation"
+         download-size="54"
+         install-size="105"
+         version="1.1.0.v201211130549"
+         unpack="false"/>
+
+   <plugin
+         id="javax.servlet"
+         download-size="103"
+         install-size="203"
+         version="3.1.0.v20140303-1611"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.common"
+         download-size="345"
+         install-size="727"
+         version="2.11.0.v20150512-0501"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.ecore"
+         download-size="1161"
+         install-size="2875"
+         version="2.11.0.v20150512-0501"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.ecore.xmi"
+         download-size="223"
+         install-size="479"
+         version="2.11.0.v20150512-0501"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.runtime"
+         download-size="73"
+         install-size="157"
+         version="3.10.0.v20140318-2214"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.contenttype"
+         download-size="91"
+         install-size="188"
+         version="3.4.200.v20140207-1251"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext"
+         download-size="2541"
+         install-size="5850"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.util"
+         download-size="273"
+         install-size="589"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.antlr.runtime"
+         download-size="201"
+         install-size="425"
+         version="3.2.0.v201101311130"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.common.types"
+         download-size="469"
+         install-size="1132"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ecore"
+         download-size="15"
+         install-size="26"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.inject"
+         download-size="508"
+         install-size="1162"
+         version="3.0.0.v201312141243"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.resources"
+         download-size="812"
+         install-size="1765"
+         version="3.9.0.v20140514-1307"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.text"
+         download-size="243"
+         install-size="481"
+         version="3.5.300.v20130515-1451"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.filesystem"
+         download-size="56"
+         install-size="107"
+         version="1.4.100.v20140514-1614"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.expressions"
+         download-size="86"
+         install-size="169"
+         version="3.4.600.v20140128-0851"
+         unpack="false"/>
+
+   <plugin
+         id="com.ibm.icu.base"
+         download-size="177"
+         install-size="363"
+         version="52.1.0.v201404171520"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.commands"
+         download-size="106"
+         install-size="200"
+         version="3.6.100.v20140528-1422"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.jcl"
+         download-size="23"
+         install-size="43"
+         version="1.7.2.v20130115-1340"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.jul"
+         download-size="11"
+         install-size="18"
+         version="1.7.2.v20121108-1250"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.ds"
+         download-size="190"
+         install-size="392"
+         version="1.4.200.v20131126-2331"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.util"
+         download-size="76"
+         install-size="139"
+         version="1.0.500.v20130404-1337"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.net"
+         download-size="287"
+         install-size="564"
+         version="3.2.0.v201305141515"
+         unpack="false"/>
+
+   <plugin
+         id="javax.mail.glassfish"
+         download-size="480"
+         install-size="1065"
+         version="1.4.1.v201108011116"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase"
+         download-size="4627"
+         install-size="11261"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.lib"
+         download-size="135"
+         install-size="344"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.guava"
+         download-size="1555"
+         install-size="3542"
+         version="10.0.1.v201203051515"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.httpcomponents.httpclient"
+         download-size="830"
+         install-size="1770"
+         version="4.3.6.v201411290715"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.httpcomponents.httpcore"
+         download-size="311"
+         install-size="642"
+         version="4.3.3.v201411290715"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.httpclient"
+         download-size="314"
+         install-size="650"
+         version="3.1.0.v201012070820"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.codec"
+         download-size="251"
+         install-size="504"
+         version="1.6.0.v201305230611"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.exec"
+         download-size="61"
+         install-size="116"
+         version="1.1.0.v201301240602"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.smap"
+         download-size="16"
+         install-size="26"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtend.lib.macro"
+         download-size="71"
+         install-size="133"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ide"
+         download-size="146"
+         install-size="313"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.ide"
+         download-size="615"
+         install-size="2665"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext"
+         download-size="2541"
+         install-size="5850"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.util"
+         download-size="273"
+         install-size="589"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.antlr.runtime"
+         download-size="201"
+         install-size="425"
+         version="3.2.0.v201101311130"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.logging"
+         download-size="10"
+         install-size="16"
+         version="1.2.15.v201603040440"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.common.types"
+         download-size="469"
+         install-size="1132"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.builder"
+         download-size="351"
+         install-size="810"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.smap"
+         download-size="16"
+         install-size="26"
+         version="2.9.2.v201603040440"
+         unpack="false"/>
+
+</feature>

@@ -1,0 +1,67 @@
+import java.util.Date
+import java.util.List
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.net.URI
+import java.nio.charset.Charset
+import java.text.SimpleDateFormat
+
+import org.openhab.core.library.types.*
+import org.joda.time.DateTime
+
+//High-level goals variables
+var String url = "C:\\Users\\agost\\Documents\\Ruscio\\OpenHAB\\configurations\\high_level_goals.conf"
+var Number threashold //if goal is of temperature
+var Date date_beg = null
+var Date date_end = null
+
+var Timer windowsAlarm = null
+
+rule Startup
+when
+	System started
+then
+	var String lastGoal = null;
+	var List<String> lines = Files.readAllLines(Paths.get(new URI(url)), Charset.defaultCharset());
+	for(String s : lines) {
+		if(s.equals("WINDOW") || s.contains("KEEP") || s.contains("ELEC")) {
+			lastGoal = s;
+		}
+		else {
+			if(lastGoal.equals("WINDOW")) {
+				if(date_beg == null) {
+					date_beg = new SimpleDateFormat("HH:mm").parse(s);
+				} else {
+					date_end = new SimpleDateFormat("HH:mm").parse(s);
+				}
+			}
+			else if(lastGoal.contains("KEEP")) {
+				threashold = Float.parseFloat(s);
+			}
+		}
+	}
+end
+
+rule "Increase temperature - threashold reached"
+when
+	Item Temperature received update
+then
+	// Plan: if temperature < threshold => increase it
+	if(Temperature.state instanceof DecimalType) {
+		var Number temp = Temperature.state as DecimalType
+		//say execute to increase temperature
+		
+	}
+end
+
+rule "Open windows and balconies"
+when
+	 Time cron "0 * * * * ?"  //every minute
+then
+	var Date date = new Date();
+	if(date_beg.toString().equals(new SimpleDateFormat("HH:mm").format(date)) ) {
+		//open all windows
+		//notify this to execution
+		//execution should make temperature decrease
+	}
+end

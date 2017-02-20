@@ -1,0 +1,270 @@
+var Number lights_on_counter_LR
+var Number lights_on_counter_K
+var Number lights_on_counter_SR
+var Number lights_on_counter_BR
+var Number lights_number = 8
+var Number lights_on_counter
+var Number lights_livingroom_on_counter
+var Number lights_kitchen_on_counter
+var Number lights_bathroom_on_counter
+var Number lights_sleepingroom_on_counter
+
+var Number windows_open_counter_LR
+var Number windows_open_counter_K
+var Number windows_open_counter_SR
+var Number windows_open_counter_BR
+var Number windows_number = 6
+var Number windows_open_counter
+var Number windows_livingroom_open_counter
+var Number windows_kitchen_open_counter
+var Number windows_bathroom_open_counter
+var Number windows_sleepingroom_open_counter
+
+var Number temperature
+
+
+
+rule Startup
+when
+	System started
+then
+	//Initialize variables
+	lights_on_counter 	= 0
+	lights_livingroom_on_counter = 0
+	lights_kitchen_on_counter = 0
+	lights_bathroom_on_counter = 0
+	lights_sleepingroom_on_counter = 0
+	
+	windows_open_counter = 0
+	windows_livingroom_open_counter = 0
+	windows_kitchen_open_counter = 0
+	windows_bathroom_open_counter = 0
+	windows_sleepingroom_open_counter = 0
+	
+	temperature = 0.0
+	
+	//Get electricity consumption
+	//postUpdate(Electricity_Consumption, 0)
+	
+	//Get number of windows open and which ones
+	postUpdate(Windows_Number, windows_open_counter)
+	postUpdate(Windows_LivingRoom, windows_livingroom_open_counter)
+	postUpdate(Windows_Kitchen, windows_kitchen_open_counter)
+	postUpdate(Windows_SleepingRoom, windows_bathroom_open_counter)
+	postUpdate(Windows_Bathroom, windows_sleepingroom_open_counter)
+	
+	//Get number of lights on and which ones
+	postUpdate(LightsOn, lights_on_counter)
+	postUpdate(Lights_LivingRoom, lights_livingroom_on_counter)
+	postUpdate(Lights_Kitchen, lights_kitchen_on_counter)
+	postUpdate(Lights_SleepingRoom, lights_sleepingroom_on_counter)
+	postUpdate(Lights_Bathroom, lights_bathroom_on_counter)
+	
+	
+	//Get temperature for each room
+	postUpdate(Temperature, temperature)
+	
+	//Calculate avg. temperature
+	
+	//Every
+end
+
+//Living room
+rule "Increase open windows counter LivingRoom"
+when
+	Item LivingRoom_Windows_l1 		changed from OFF to ON or
+	Item LivingRoom_Windows_l2 		changed from OFF to ON
+then
+	windows_open_counter_LR = windows_open_counter_LR + 1;
+	if(windows_open_counter_LR > 2) windows_open_counter_LR = 2;
+	postUpdate(Windows_LivingRoom, windows_open_counter_LR)
+end
+
+rule "Decrease open windows counter LivingRoom"
+when
+	Item LivingRoom_Windows_l1 		changed from ON to OFF or
+	Item LivingRoom_Windows_l2 		changed from ON to OFF
+then
+	windows_open_counter_LR = windows_open_counter_LR - 1;
+	if(windows_open_counter_LR < 0) windows_open_counter_LR = 0;
+	postUpdate(Windows_LivingRoom, windows_open_counter_LR)
+end
+
+rule "Increase lights on counter LivingRoom"
+when
+	Item LivingRoom_Lights_l1 		changed from OFF to ON or
+	Item LivingRoom_Lights_l2 		changed from OFF to ON or
+	Item LivingRoom_Lights_l3 		changed from OFF to ON
+then
+	lights_on_counter_LR = lights_on_counter_LR + 1;
+	if(lights_on_counter_LR > 3) lights_on_counter_LR = 3;
+	postUpdate(Lights_LivingRoom, lights_on_counter_LR)
+end
+
+rule "Decrease open lights on LivingRoom"
+when
+	Item LivingRoom_Lights_l1 		changed from ON to OFF or
+	Item LivingRoom_Lights_l2 		changed from ON to OFF or
+	Item LivingRoom_Lights_l3 		changed from ON to OFF
+then
+	lights_on_counter_LR = lights_on_counter_LR - 1;
+	if(lights_on_counter_LR < 0) lights_on_counter_LR = 0;
+	postUpdate(Lights_LivingRoom, lights_on_counter_LR)
+end
+
+//Kitchen
+rule "Increase open windows counter Kitchen"
+when
+	Item Kitchen_Windows_l1 		changed from OFF to ON or
+	Item Kitchen_Windows_l2 		changed from OFF to ON
+then
+	windows_open_counter_K = windows_open_counter_K + 1;
+	if(windows_open_counter_K > 2) windows_open_counter_K = 2;
+	postUpdate(Windows_Kitchen, windows_open_counter_K)
+end
+
+rule "Decrease open windows counter Kitchen"
+when
+	Item Kitchen_Windows_l1 		changed from ON to OFF or
+	Item Kitchen_Windows_l2 		changed from ON to OFF
+then
+	windows_open_counter_K = windows_open_counter_K - 1;
+	if(windows_open_counter_K < 0) windows_open_counter_K = 0;
+	postUpdate(Windows_Kitchen, windows_open_counter_K)
+end
+
+rule "Increase lights on counter Kitchen"
+when
+	Item Kitchen_Lights_l1 		changed from OFF to ON or
+	Item Kitchen_Lights_l2 		changed from OFF to ON
+then
+	lights_on_counter_K = lights_on_counter_K + 1;
+	if(lights_on_counter_K > 3) lights_on_counter_K = 3;
+	postUpdate(Lights_Kitchen, lights_on_counter_K)
+end
+
+rule "Decrease open lights on Kitchen"
+when
+	Item Kitchen_Lights_l1 		changed from ON to OFF or
+	Item Kitchen_Lights_l2 		changed from ON to OFF
+then
+	lights_on_counter_K = lights_on_counter_K - 1;
+	if(lights_on_counter_K < 0) lights_on_counter_K = 0;
+	postUpdate(Lights_Kitchen, lights_on_counter_K)
+end
+
+//Sleeping room
+rule "Increase open windows counter Sleeping room"
+when
+	Item SleepingRoom_Windows_l1 		changed from OFF to ON
+then
+	windows_open_counter_SR = windows_open_counter_SR + 1;
+	if(windows_open_counter_SR > 2) windows_open_counter_SR = 2;
+	postUpdate(Windows_SleepingRoom, windows_open_counter_SR)
+end
+
+rule "Decrease open windows counter Sleeping room"
+when
+	Item SleepingRoom_Windows_l1 		changed from ON to OFF or
+	Item SleepingRoom_Windows_l2 		changed from ON to OFF
+then
+	windows_open_counter_SR = windows_open_counter_SR - 1;
+	if(windows_open_counter_SR < 0) windows_open_counter_SR = 0;
+	postUpdate(Windows_SleepingRoom, windows_open_counter_SR)
+end
+
+rule "Increase lights on counter Sleeping room"
+when
+	Item SleepingRoom_Lights_l1 		changed from OFF to ON or
+	Item SleepingRoom_Lights_l2 		changed from OFF to ON
+then
+	lights_on_counter_SR = lights_on_counter_SR + 1;
+	if(lights_on_counter_SR > 3) lights_on_counter_SR = 3;
+	postUpdate(Lights_SleepingRoom, lights_on_counter_SR)
+end
+
+rule "Decrease open lights on Sleeping room"
+when
+	Item SleepingRoom_Lights_l1 		changed from ON to OFF or
+	Item SleepingRoom_Lights_l2 		changed from ON to OFF
+then
+	lights_on_counter_K = lights_on_counter_K - 1;
+	if(lights_on_counter_K < 0) lights_on_counter_K = 0;
+	postUpdate(Lights_SleepingRoom, lights_on_counter_K)
+end
+
+//Bathroom
+
+
+
+
+rule "Decrease open windows counter"
+when
+	Item LivingRoom_Windows_l1 		changed from ON to OFF or
+	Item LivingRoom_Windows_l2 		changed from ON to OFF or
+	Item Kitchen_Windows_l1 		changed from ON to OFF or
+	Item Kitchen_Windows_l2 		changed from ON to OFF or
+	Item SleepingRoom_Windows_l1 	changed from ON to OFF or
+	Item Bathroom_Windows_l1 		changed from ON to OFF
+then
+	windows_open_counter = windows_open_counter - 1;
+	if(windows_open_counter < 0) windows_open_counter = 0;
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Increase open windows counter"
+when
+	Item LivingRoom_Windows_l1 		changed from OFF to ON or
+	Item LivingRoom_Windows_l2		changed from OFF to ON or
+	Item Kitchen_Windows_l1 		changed from OFF to ON or
+	Item Kitchen_Windows_l2 		changed from OFF to ON or
+	Item SleepingRoom_Windows_l1 	changed from OFF to ON or
+	Item Bathroom_Windows_l1 		changed from OFF to ON
+then
+	windows_open_counter = windows_open_counter + 1;
+	if(windows_open_counter > windows_number) windows_open_counter = windows_number
+	//logDebug("default.rules", "windows_open_counter: " + windows_open_counter)
+	postUpdate(Windows_Number, windows_open_counter)
+end
+
+rule "Decrease lights on counter"
+when
+	Item LivingRoom_Lights_l1 		changed from ON to OFF or
+	Item LivingRoom_Lights_l2 		changed from ON to OFF or
+	Item LivingRoom_Lights_l3 		changed from ON to OFF or
+	Item Kitchen_Lights_l1 			changed from ON to OFF or
+	Item Kitchen_Lights_l2 			changed from ON to OFF or
+	Item SleepingRoom_Lights_l1 	changed from ON to OFF or
+	Item SleepingRoom_Lights_l2		changed from ON to OFF or
+	Item Bathroom_Lights_l1 		changed from ON to OFF
+then
+	lights_on_counter = lights_on_counter - 1;
+	if(lights_on_counter < 0) lights_on_counter = 0;
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+rule "Increase lights on counter"
+when
+	Item LivingRoom_Lights_l1 		changed from OFF to ON or
+	Item LivingRoom_Lights_l2 		changed from OFF to ON or
+	Item LivingRoom_Lights_l3 		changed from OFF to ON or
+	Item Kitchen_Lights_l1 			changed from OFF to ON or
+	Item Kitchen_Lights_l2 			changed from OFF to ON or
+	Item SleepingRoom_Lights_l1 	changed from OFF to ON or
+	Item SleepingRoom_Lights_l2		changed from OFF to ON or
+	Item Bathroom_Lights_l1 		changed from OFF to ON
+then
+	lights_on_counter = lights_on_counter + 1;
+	if(lights_on_counter > lights_number) lights_on_counter = lights_number
+	postUpdate(LightsOn, lights_on_counter)
+end
+
+/*rule "Change temperature in a room"
+when
+	Item LivingRoom_Heating_Temperature		changed or
+	Item Kitchen_Heating_Temperature		changed or
+	Item SleepingRoom_Heating_Temperature	changed or
+	Item Bathroom_Heating_Temperature		changed or
+then
+	//send it by MQTT. stop
+end*/

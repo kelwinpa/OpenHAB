@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.emf.mwe2.runtime.sdk.source"
+      label="%featureName"
+      version="2.8.3.v201512160556"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%UpdateSiteName" url="http://download.eclipse.org/modeling/emft/mwe/updates/"/>
+      <discovery label="%UpdateSiteName" url="http://download.eclipse.org/modeling/emft/mwe/updates/"/>
+   </url>
+
+   <plugin
+         id="org.eclipse.emf.mwe2.runtime.source"
+         download-size="0"
+         install-size="0"
+         version="2.8.3.v201512160556"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.mwe2.lib.source"
+         download-size="0"
+         install-size="0"
+         version="2.8.3.v201512160556"
+         unpack="false"/>
+
+</feature>

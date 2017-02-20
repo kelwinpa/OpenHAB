@@ -1,0 +1,30 @@
+Number Electricity_Consumption { mqtt="<[oh2mqtt:home/general/electricity:state:default]" }
+Switch LivingRoom_Windows_l1 { mqtt=">[oh2mqtt:test:command:ON:1],>[OH2MQTT:test:command:OFF:0]" }
+
+Number LightsOn
+Number Lights_LivingRoom 
+Number Lights_Kitchen 
+Number Lights_SleepingRoom 
+Number Lights_Bathroom 
+Switch LivingRoom_Lights_l1
+Switch LivingRoom_Lights_l2
+Switch LivingRoom_Lights_l3
+Switch Kitchen_Lights_l1
+Switch Kitchen_Lights_l2
+Switch SleepingRoom_Lights_l1
+Switch SleepingRoom_Lights_l2
+Switch Bathroom_Lights_l1
+
+Number Windows_Number 
+Number Windows_LivingRoom
+Number Windows_Kitchen 
+Number Windows_SleepingRoom 
+Number Windows_Bathroom 
+//Switch LivingRoom_Windows_l1
+Switch LivingRoom_Windows_l2
+Switch Kitchen_Windows_l1
+Switch Kitchen_Windows_l2
+Switch SleepingRoom_Windows_l1
+Switch Bathroom_Windows_l1
+
+Number Temperature
